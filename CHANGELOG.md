@@ -4,19 +4,21 @@ librdkafka v2.9.0 is a feature release:
 
 * Commits during a cooperative incremental rebalance aren't causing
   an assignment lost if the generation id was bumped in between (#4908).
-* Fix for librdkafka yielding before timeouts had been reached (#)
+* Fix for librdkafka yielding before timeouts had been reached (#4970)
+* Removed a 500ms latency when a consumer partition switches to a different
+  leader (#4970)
 
 
 ## Fixes
 
 ### General fixes
 
- * Issues: #
+ * Issues: #4970
    librdkafka code using `cnd_timedwait` was yielding before a timeout occurred
    without the condition being fulfilled because of spurious wake-ups.
    Solved by verifying with a monotonic clock that the expected point in time
    was reached and calling the function again if needed.
-   Happens since 1.x (#).
+   Happens since 1.x (#4970).
 
 ### Consumer fixes
 
@@ -27,6 +29,13 @@ librdkafka v2.9.0 is a feature release:
   Solved by not rejoining the group in case an illegal generation error happens
   during a rebalance.
   Happening since v1.6.0 (#4908)
+* Issues: #4970
+  When switching to a different leader a consumer could wait 500ms 
+  (`fetch.error.backoff.ms`) before starting to fetch again. The fetch backoff wasn't reset when joining the new broker.
+  Solved by resetting it, given it's not needed to backoff
+  the first fetch on a different node. This way faster leader switches are
+  possible.
+  Happens since 1.x (#4970).
 
 
 
