@@ -2,11 +2,14 @@
 
 librdkafka v2.9.0 is a feature release:
 
-* Commits during a cooperative incremental rebalance aren't causing
-  an assignment lost if the generation id was bumped in between (#4908).
-* Fix for librdkafka yielding before timeouts had been reached (#4970)
-* Removed a 500ms latency when a consumer partition switches to a different
-  leader (#4970)
+ * Commits during a cooperative incremental rebalance aren't causing
+   an assignment lost if the generation id was bumped in between (#4908).
+ * Fix for librdkafka yielding before timeouts had been reached (#4970)
+ * Removed a 500ms latency when a consumer partition switches to a different
+   leader (#4970)
+ * The mock cluster implementation removes brokers from Metadata response
+   when they're not available, this simulates better the actual behavior of
+   a cluster that is using KRaft (#4970).
 
 
 ## Fixes
