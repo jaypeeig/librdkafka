@@ -16,6 +16,8 @@ librdkafka v2.9.0 is a feature release:
    and `topic.metadata.propagation.max.ms` hasn't passed still (@marcin-krystianc, #4970).
  * Doesn't update partition leaders if the topic in metadata
    response has errors (#4970).
+ * Only topic authorization errors in a metadata response are considered
+   permanent and are returned to the user (#4970).
 
 
 ## Fixes
@@ -33,18 +35,23 @@ librdkafka v2.9.0 is a feature release:
    on metadata cache expiry. It allows the client to continue working
    in case of temporary problems to the Kafka metadata plane.
    Happens since 1.x (#4970).
- * Issues: #
+ * Issues: #4970
    Doesn't mark the topic as unknown if it had been marked as existent earlier
    and `topic.metadata.propagation.max.ms` hasn't passed still. It achieves
    this property expected effect even if a different broker had
    previously reported the topic as existent.
    Happens since 1.x (@marcin-krystianc, #4970).
- * Issues: #
+ * Issues: #4970
    Doesn't update partition leaders if the topic in metadata
    response has errors. It's in line with what Java client does and allows
    to avoid segmentation faults for unknown partitions.
    Happens since 1.x (#4970).
-
+ * Issues: #4970
+   Only topic authorization errors in a metadata response are considered
+   permanent and are returned to the user. It's in line with what Java client
+   does and avoids returning to the user an error that wasn't meant to be
+   permanent.
+   Happens since 1.x (#4970).
 
 ### Consumer fixes
 
