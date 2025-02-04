@@ -21,6 +21,8 @@ librdkafka v2.9.0 is a feature release:
  * The function `rd_kafka_offsets_for_times` refreshes leader information
    if the error requires it, allowing it to succeed on
    subsequent manual retries (#4970).
+ * Deprecated `api.version.request`, `api.version.fallback.ms` and
+   `broker.version.fallback` configuration properties (#4970).
 
 
 ## Fixes
