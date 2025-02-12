@@ -1,12 +1,22 @@
-# librdkafka v2.8.3
+# librdkafka v2.9.0
 
-librdkafka v2.8.3 is a maintenance release:
+librdkafka v2.9.0 is a feature release:
 
 * Commits during a cooperative incremental rebalance aren't causing
   an assignment lost if the generation id was bumped in between (#4908).
+* Fix for librdkafka yielding before timeouts had been reached (#)
 
 
 ## Fixes
+
+### General fixes
+
+ * Issues: #
+   librdkafka code using `cnd_timedwait` was yielding before a timeout occurred
+   without the condition being fulfilled because of spurious wake-ups.
+   Solved by verifying with a monotonic clock that the expected point in time
+   was reached and calling the function again if needed.
+   Happens since 1.x (#).
 
 ### Consumer fixes
 
