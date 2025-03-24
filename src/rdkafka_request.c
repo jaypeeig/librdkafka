@@ -2622,7 +2622,10 @@ err:
                 /* In case it's a brokers full refresh call,
                  * avoid retrying it on this same broker.
                  * This is to prevent client is hung
-                 * until it can connect to this broker again. */
+                 * until it can connect to this broker again.
+                 * No need to acquire the lock here but
+                 * when decrementing the integer pointed
+                 * by `decr`. */
                 if (!request->rkbuf_u.Metadata.decr &&
                     rd_kafka_buf_retry(rkb, request))
                         return;
