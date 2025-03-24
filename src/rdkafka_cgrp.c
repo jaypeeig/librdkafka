@@ -5164,12 +5164,18 @@ rd_kafka_cgrp_calculate_subscribe_revoking_partitions(
         return revoking;
 }
 
+/**
+ * @brief Set the new subscription and increase subscription version.
+ *
+ * @return The new subscription version.
+ */
 static int32_t
 rd_kafka_cgrp_subscription_set(rd_kafka_cgrp_t *rkcg,
                                rd_kafka_topic_partition_list_t *rktparlist) {
-        int32_t ret = rd_atomic32_add(&rkcg->rkcg_subscription_version, 1);
+        int32_t new_subscription_version =
+            rd_atomic32_add(&rkcg->rkcg_subscription_version, 1);
         rkcg->rkcg_subscription = rktparlist;
-        return ret;
+        return new_subscription_version;
 }
 
 /**
