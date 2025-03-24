@@ -101,7 +101,7 @@ int main_0068_produce_timeout(int argc, char **argv) {
         rk = test_create_handle(RD_KAFKA_PRODUCER, conf);
         /* message timeout should be less that rtt */
         rkt = test_create_producer_topic(rk, topic, "message.timeout.ms",
-                                         "3000", NULL);
+                                         "2000", NULL);
 
         TEST_SAY("Auto-creating topic %s\n", topic);
         test_auto_create_topic_rkt(rk, rkt, tmout_multip(5000));
