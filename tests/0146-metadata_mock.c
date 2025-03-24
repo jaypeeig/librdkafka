@@ -134,7 +134,7 @@ static void do_test_fast_metadata_refresh(int variation) {
                 expected_metadata_requests = 7;
                 break;
         default:
-                expected_metadata_requests = 0;
+                TEST_FAIL("Invalid variation %d", variation);
                 break;
         }
 
