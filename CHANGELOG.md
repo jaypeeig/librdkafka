@@ -56,7 +56,7 @@ librdkafka v2.9.0 is a feature release:
    this property expected effect even if a different broker had
    previously reported the topic as existent.
    Happens since 1.x (@marcin-krystianc, #4970).
- * Issues: #4970
+ * Issues: #4907
    Doesn't update partition leaders if the topic in metadata
    response has errors. It's in line with what Java client does and allows
    to avoid segmentation faults for unknown partitions.
