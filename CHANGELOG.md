@@ -1,7 +1,11 @@
 # librdkafka v2.9.0
 
+librdkafka v2.9.0 is a feature release:
+
  * Identify brokers only by broker id (#4557, @mfleming)
  * Remove unavailable brokers and their thread (#4557, @mfleming)
+ * Commits during a cooperative incremental rebalance aren't causing
+   an assignment lost if the generation id was bumped in between (#4908).
 
 
 ## Fixes
@@ -20,6 +24,16 @@
    temporarily or permanently so we always remove it and it'll be added back when
    it becomes available again.
    Happens since 1.x (#4557, @mfleming).
+
+### Consumer fixes
+
+* Issues: #4059
+  Commits during a cooperative incremental rebalance could cause an
+  assignment lost if the generation id was bumped by a second join
+  group request.
+  Solved by not rejoining the group in case an illegal generation error happens
+  during a rebalance.
+  Happening since v1.6.0 (#4908)
 
 
 
