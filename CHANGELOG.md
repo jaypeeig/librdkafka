@@ -31,6 +31,9 @@ librdkafka v2.9.0 is a feature release:
  * Fix for the case where a metadata refresh enqueued on an unreachable broker
    prevents refreshing the controller or the coordinator until that broker
    becomes reachable again (#4970).
+ * Prevent metadata cache corruption when topic id changes
+   (@kwdubuc, @marcin-krystianc, @GerKr, #4970).
+
 
 ## Fixes
 
@@ -75,6 +78,11 @@ librdkafka v2.9.0 is a feature release:
    the broker the request is enqueued on is up again.
    Solved by not retrying these kinds of metadata requests.
    Happens since 1.x (#4970).
+ * Issues: #4964, #4778
+   Prevent metadata cache corruption when topic id for the same topic name
+   changes. Solved by correctly removing the entry with the old topic id from metadata cache
+   to prevent subsequent use-after-free.
+   Happens since 2.4.0 (@kwdubuc, @marcin-krystianc, @GerKr, #4970).
 
 ### Consumer fixes
 
